@@ -1,12 +1,27 @@
+import { Model } from 'mongoose';
 import { USER_ROLE } from './user.constance';
 
 export interface IUser {
   password: string;
   needsPasswordChange: boolean;
   role: 'admin' | 'user';
-  type: string;
+  type: 'technical' | 'political' | 'administrative';
   isDeleted: boolean;
   isBlocked: boolean;
 }
 
 export type TUserRole = keyof typeof USER_ROLE;
+
+export interface UserModel extends Model<IUser> {
+  isUserExistsByEmail(email: string): Promise<IUser>;
+
+  isUserPasswordMatch(
+    plainTextPassword: string,
+    hashedPassword: string,
+  ): Promise<boolean>;
+
+  isJWTIssuedBeforePasswordChanged(
+    passwordChangedTimestamp: Date,
+    jwtIssuedTimestamp: number,
+  ): boolean;
+}
