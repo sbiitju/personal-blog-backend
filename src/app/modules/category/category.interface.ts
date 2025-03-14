@@ -7,5 +7,6 @@ export interface ISubcategory {
 
 export interface ICategory {
   name: string;
+  role: 'admin' | 'political' | 'technical';
   subcategories: ISubcategory[];
 }
