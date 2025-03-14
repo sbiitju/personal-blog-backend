@@ -62,9 +62,8 @@ const politicalSchema = new Schema<IPolitical, PoliticalModel>(
   { timestamps: true },
 );
 
-// Pre-Validation Hook for Checking Existing Domain and Email
 politicalSchema.pre('validate', async function (next) {
-  const existingUser = await Admin.findOne({
+  const existingUser = await Political.findOne({
     $or: [{ domain: this.domain }, { email: this.email }],
   });
 
@@ -84,7 +83,7 @@ politicalSchema.pre('validate', async function (next) {
   next();
 });
 
-export const Admin = model<IPolitical, PoliticalModel>(
-  'Admin',
+export const Political = model<IPolitical, PoliticalModel>(
+  'Political',
   politicalSchema,
 );
