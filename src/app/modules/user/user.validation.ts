@@ -36,7 +36,7 @@ const createClientSchema = z.object({
 const createAdminSchema = z.object({
   password: z.string().optional(),
   admin: z.object({
-    user: z.string({ required_error: 'User ID is required' }),
+    user: z.string().optional(),
     name: z.string({ required_error: 'Name is required' }),
     email: z
       .string({ required_error: 'Email is required' })

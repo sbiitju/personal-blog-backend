@@ -19,8 +19,13 @@ router.post(
 
 router.post(
   '/create-admin',
+  (req, res, next) => {
+    console.log(req.body);  
+    next();
+  },
   validateRequest(userValidation.createAdminSchema),
-  UserController.createAdminAccount,
+  UserController.createAdminAccount
 );
+
 
 export const UserRoutes = router;
