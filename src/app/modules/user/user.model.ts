@@ -35,14 +35,22 @@ const userSchema = new Schema<IUser, UserModel>(
   { timestamps: true },
 );
 
+// Hash password before saving the user
 userSchema.pre('save', async function (next) {
-  // eslint-disable-next-line @typescript-eslint/no-this-alias
   const user = this;
-  user.password = await bcrypt.hash(
-    user.password,
-    Number(config.bcrypt_salt_rounds),
-  );
-  next();
+  // Only hash the password if it has been modified (or is new)
+  if (!user.isModified('password')) {
+    return next();
+  }
+  try {
+    user.password = await bcrypt.hash(
+      user.password,
+      Number(config.bcrypt_salt_rounds),
+    );
+    next();
+  } catch (error: any) {
+    return next(error);
+  }
 });
 
 // set empty string after saving password
@@ -51,6 +59,9 @@ userSchema.post('save', function (doc, next) {
   next();
 });
 
-
+// Method to find user by email
+userSchema.statics.isUserExistsByEmail = async function (email: string) {
+  return await this.findOne({ email }).select('+password'); // Always include password for comparison
+};
 
 export const User = model<IUser, UserModel>('User', userSchema);
