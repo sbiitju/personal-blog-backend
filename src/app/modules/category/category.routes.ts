@@ -10,6 +10,11 @@ router.post(
   validateRequest(categoryValidation.createCategorySchema),
   CategoryController.createCategory,
 );
+router.post(
+  '/create-sub-category',
+  validateRequest(categoryValidation.createSubcategorySchema),
+  CategoryController.createSubCategory,
+);
 
 router.get('/get-all-categories', CategoryController.getAllCategories);
 
