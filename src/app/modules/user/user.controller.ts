@@ -2,9 +2,16 @@ import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsynch';
 import sendResponse from '../../utils/sendResponse';
 import { UserServices } from './user.service';
+import { TImageFile } from '../../interface/image.interface';
 
 const createClientAccount = catchAsync(async (req, res) => {
-  const { political: clientData, password, role } = req.body;
+  const file = req?.file as TImageFile;
+
+  const { client: clientData, password, role } = req.body;
+
+  if (file) {
+    clientData.profilePicture = file.path;
+  }
   // will call services func to send this data
   const result = await UserServices.createClientAccountIntoDb(
     password,

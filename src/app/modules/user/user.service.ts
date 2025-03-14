@@ -6,6 +6,7 @@ import { User } from './user.model';
 import AppError from '../../errors/AppError';
 import httpStatus from 'http-status';
 import { Political } from '../political/political.model';
+import { TImageFile } from '../../interface/image.interface';
 
 const createClientAccountIntoDb = async (
   password: string,

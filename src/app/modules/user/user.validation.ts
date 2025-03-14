@@ -3,7 +3,7 @@ import { z } from 'zod';
 export const createClientSchema = z.object({
   password: z.string().optional(),
   role: z.string().optional(),
-  political: z.object({
+  client: z.object({
     user: z.string({ required_error: 'User ID is required' }), // MongoDB ObjectId is stored as a string
     name: z.string({ required_error: 'Name is required' }),
     email: z
