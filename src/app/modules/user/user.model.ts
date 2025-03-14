@@ -64,4 +64,12 @@ userSchema.statics.isUserExistsByEmail = async function (email: string) {
   return await this.findOne({ email }).select('+password'); // Always include password for comparison
 };
 
+// Method to compare password during login
+userSchema.statics.isUserPasswordMatch = async function (
+  plainTextPassword: string,
+  hashedPassword: string,
+) {
+  return await bcrypt.compare(plainTextPassword, hashedPassword);
+};
+
 export const User = model<IUser, UserModel>('User', userSchema);
