@@ -1,4 +1,4 @@
-import { Types } from 'mongoose';
+import { Model, Types } from 'mongoose';
 
 export interface IPolitical {
   user: Types.ObjectId;
@@ -17,4 +17,9 @@ export interface IPolitical {
   domain: string;
   position: string;
   address: string;
+}
+
+export interface PoliticalModel extends Model<IPolitical> {
+  isUserExistsByDomain(domain: string): Promise<IPolitical | null>;
+  isUserExistsByEmail(email: string): Promise<IPolitical | null>;
 }
