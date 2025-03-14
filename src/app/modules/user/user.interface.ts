@@ -4,8 +4,7 @@ import { USER_ROLE } from './user.constance';
 export interface IUser {
   password: string;
   needsPasswordChange: boolean;
-  role: 'admin' | 'user';
-  type: 'technical' | 'political' | 'administrative';
+  role: 'admin' | 'political' | 'technical';
   isDeleted: boolean;
   isBlocked: boolean;
 }

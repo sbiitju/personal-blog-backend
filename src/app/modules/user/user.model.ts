@@ -15,12 +15,7 @@ const userSchema = new Schema<IUser, UserModel>(
     },
     role: {
       type: String,
-      enum: ['admin', 'user'],
-      required: true,
-    },
-    type: {
-      type: String,
-      enum: ['technical', 'political', 'administrative'],
+      enum: ['admin', 'technical', 'political'],
       required: true,
     },
     isDeleted: {
