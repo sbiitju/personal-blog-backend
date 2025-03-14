@@ -26,6 +26,21 @@ const createClientAccount = catchAsync(async (req, res) => {
   });
 });
 
+const createAdminAccount = catchAsync(async (req, res) => {
+  const { admin: adminData, password } = req.body;
+  const result = await UserServices.createAdminAccountIntoDb(
+    password,
+    adminData,
+  );
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Admin Account created successfully',
+    data: result,
+  });
+});
+
 export const UserController = {
   createClientAccount,
+  createAdminAccount
 };

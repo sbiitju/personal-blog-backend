@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const createClientSchema = z.object({
+const createClientSchema = z.object({
   password: z.string().optional(),
   role: z.string().optional(),
   client: z.object({
@@ -33,6 +33,20 @@ export const createClientSchema = z.object({
   }),
 });
 
+const createAdminSchema = z.object({
+  password: z.string().optional(),
+  admin: z.object({
+    user: z.string({ required_error: 'User ID is required' }),
+    name: z.string({ required_error: 'Name is required' }),
+    email: z
+      .string({ required_error: 'Email is required' })
+      .email('Invalid email format'),
+    phone: z.string({ required_error: 'Phone number is required' }),
+    domain: z.string({ required_error: 'Domain is required' }),
+  }),
+});
+
 export const userValidation = {
   createClientSchema,
+  createAdminSchema,
 };

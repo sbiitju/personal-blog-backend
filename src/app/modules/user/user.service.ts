@@ -6,7 +6,8 @@ import { User } from './user.model';
 import AppError from '../../errors/AppError';
 import httpStatus from 'http-status';
 import { Political } from '../political/political.model';
-import { TImageFile } from '../../interface/image.interface';
+import { IAdmin } from '../admin/admin.interface';
+import { Admin } from '../admin/admin.model';
 
 const createClientAccountIntoDb = async (
   password: string,
@@ -50,6 +51,44 @@ const createClientAccountIntoDb = async (
   }
 };
 
+const createAdminAccountIntoDb = async (password: string, payload: IAdmin) => {
+  const userData: Partial<IUser> = {};
+
+  // set password
+  userData.password = password || (config.default_password as string);
+  // set role
+  userData.role = 'admin';
+
+  const session = await mongoose.startSession();
+  try {
+    session.startTransaction();
+    // Create user (admin user)
+    const newUser = await User.create([userData], { session });
+
+    if (!newUser.length) {
+      throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create admin');
+    }
+
+    payload.user = newUser[0]._id; // Link the newly created user to the admin entity
+
+    // Create admin transaction
+    const newAdmin = await Admin.create([payload], { session });
+    if (!newAdmin.length) {
+      throw new AppError(httpStatus.BAD_REQUEST, 'Failed to create admin');
+    }
+
+    await session.commitTransaction();
+    await session.endSession();
+
+    return newAdmin; // Return the newly created admin
+  } catch (err: any) {
+    await session.abortTransaction();
+    await session.endSession();
+    throw new AppError(httpStatus.INTERNAL_SERVER_ERROR, err.message);
+  }
+};
+
 export const UserServices = {
   createClientAccountIntoDb,
+  createAdminAccountIntoDb,
 };

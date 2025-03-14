@@ -2,6 +2,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import { UserController } from './user.controller';
 import { multerUpload } from '../../config/multer.config';
 import { userValidation } from './user.validation';
+import validateRequest from '../../middleware/validateRequest';
 
 const router = express.Router();
 
@@ -14,6 +15,12 @@ router.post(
     );
     return UserController.createClientAccount(req, res, next);
   },
+);
+
+router.post(
+  '/create-admin',
+  validateRequest(userValidation.createAdminSchema),
+  UserController.createAdminAccount,
 );
 
 export const UserRoutes = router;
