@@ -4,6 +4,7 @@ import path from 'path';
 import cookieParser from 'cookie-parser';
 import globalErrorHandler from './app/middleware/globalErrorHandlers';
 import notFound from './app/middleware/notFound';
+import router from './app/routes';
 const app: Application = express();
 
 // parser
@@ -16,7 +17,7 @@ app.use(cors({ origin: ['http://localhost:5173'] }));
 app.use(express.static(path.join(__dirname, '..', 'build')));
 
 // application routes
-// app.use('/api', router)
+app.use('/api', router)
 
 // Test route
 app.get('/', async (req: Request, res: Response) => {
