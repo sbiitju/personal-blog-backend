@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from 'express';
 import cors from 'cors';
 import path from 'path';
 import cookieParser from 'cookie-parser';
+import globalErrorHandler from './app/middleware/globalErrorHandlers';
 const app: Application = express();
 
 // parser
@@ -28,7 +29,7 @@ app.get('*', (req: Request, res: Response) => {
 });
 
 // global error handler
-// app.use(globalErrorHandler)
+app.use(globalErrorHandler);
 
 // not found route
 // app.use(notFound)
