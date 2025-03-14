@@ -1,14 +1,15 @@
 import mongoose from 'mongoose';
 import config from '../../config';
 import { IPolitical } from '../political/political.interface';
-import { IUser } from './user.interface';
+import { IUser, TUserRole } from './user.interface';
 import { User } from './user.model';
 import AppError from '../../errors/AppError';
 import httpStatus from 'http-status';
 import { Political } from '../political/political.model';
 
-const createPoliticalAccountIntoDb = async (
+const createClientAccountIntoDb = async (
   password: string,
+  role: TUserRole,
   payload: IPolitical,
 ) => {
   const userData: Partial<IUser> = {};
@@ -16,7 +17,7 @@ const createPoliticalAccountIntoDb = async (
   // set password
   userData.password = password || (config.default_password as string);
   // set role
-  userData.role = 'political';
+  userData.role = role || 'political';
 
   const session = await mongoose.startSession();
   try {
@@ -49,5 +50,5 @@ const createPoliticalAccountIntoDb = async (
 };
 
 export const UserServices = {
-  createPoliticalAccountIntoDb,
+  createClientAccountIntoDb,
 };

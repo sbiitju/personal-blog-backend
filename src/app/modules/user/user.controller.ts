@@ -3,17 +3,22 @@ import catchAsync from '../../utils/catchAsynch';
 import sendResponse from '../../utils/sendResponse';
 import { UserServices } from './user.service';
 
-const createPoliticalAccount = catchAsync(async (req, res) => {
-  const { political: politicalData, password } = req.body;
+const createClientAccount = catchAsync(async (req, res) => {
+  const { political: clientData, password, role } = req.body;
   // will call services func to send this data
-  const result = await UserServices.createPoliticalAccountIntoDb(
+  const result = await UserServices.createClientAccountIntoDb(
     password,
-    politicalData,
+    role,
+    clientData,
   );
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Political Account created successfully',
+    message: 'Client Account created successfully',
     data: result,
   });
 });
+
+export const UserController = {
+  createClientAccount,
+};
