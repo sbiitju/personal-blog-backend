@@ -6,7 +6,7 @@ import { ContentService } from './content.service';
 import AppError from '../../errors/AppError';
 
 const creaateContent = catchAsync(async (req, res) => {
-  const file = req?.file as TImageFile;
+  const file = req.file as TImageFile;
   const payload = req.body;
   if (file) {
     payload.photo = file.path;
@@ -18,6 +18,22 @@ const creaateContent = catchAsync(async (req, res) => {
     statusCode: httpStatus.OK,
     success: true,
     message: 'Content created successfully',
+    data: result,
+  });
+});
+
+const updateContent = catchAsync(async (req, res) => {
+  const file = req?.file as TImageFile;
+  const { id } = req.params;
+  const payload = req.body;
+  if (file) {
+    payload.photo = file.path;
+  }
+  const result = await ContentService.updateContentIntoDb(id, payload);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Content updated successfully',
     data: result,
   });
 });
@@ -83,4 +99,5 @@ export const ContentController = {
   getContentByCategory,
   getContentBySubcategory,
   getContentById,
+  updateContent,
 };
