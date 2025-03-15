@@ -17,7 +17,16 @@ router.post(
   },
 );
 
-
+router.put(
+  '/:id',
+  multerUpload.single('file'),
+  (req: Request, res: Response, next: NextFunction) => {
+    req.body = ContentValidation.updateContentSchema.parse(
+      JSON.parse(req.body.data),
+    );
+    return ContentController.updateContent(req, res, next);
+  },
+);
 
 router.get('/', ContentController.getAllContent);
 
@@ -31,7 +40,5 @@ router.get(
 );
 
 router.get('/:id', ContentController.getContentById);
-
-
 
 export const ContentRoutes = router;

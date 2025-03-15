@@ -23,4 +23,5 @@ const updateContentSchema = z.object({
 
 export const ContentValidation = {
   createContentSchema,
+  updateContentSchema
 };
