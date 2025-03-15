@@ -40,9 +40,15 @@ const getContentByCategory = async (category: string) => {
   return result;
 };
 
+const getContentBySubcategory = async (subcategory: string) => {
+  const result = await Content.find({ subcategory });
+  return result;
+};
+
 export const ContentService = {
   creeateContentIntoDb,
   getAllContentFromDb,
   getContentByDomain,
-  getContentByCategory
+  getContentByCategory,
+  getContentBySubcategory,
 };

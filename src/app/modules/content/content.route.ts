@@ -23,4 +23,9 @@ router.get('/:domain', ContentController.getContentByDomain);
 
 router.get('/category/:category', ContentController.getContentByCategory);
 
+router.get(
+  '/subcategory/:subcategory',
+  ContentController.getContentBySubcategory,
+);
+
 export const ContentRoutes = router;
