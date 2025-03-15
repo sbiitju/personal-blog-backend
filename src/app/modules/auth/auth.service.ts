@@ -60,3 +60,7 @@ const loginUser = async (payload: ILoginUser) => {
     needsPasswordChange: user?.needsPasswordChange,
   };
 };
+
+export const AuthServices = {
+  loginUser,
+};
