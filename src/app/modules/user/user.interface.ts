@@ -3,6 +3,7 @@ import { USER_ROLE } from './user.constance';
 
 export interface IUser {
   password: string;
+  email: string;
   needsPasswordChange: boolean;
   role: 'admin' | 'political' | 'technical';
   isDeleted: boolean;
