@@ -22,6 +22,17 @@ const creaateContent = catchAsync(async (req, res) => {
   });
 });
 
+const getAllContent = catchAsync(async (req, res) => {
+  const result = await ContentService.getAllContentFromDb();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Content fetched successfully',
+    data: result,
+  });
+});
+
 export const ContentController = {
   creaateContent,
+  getAllContent,
 };

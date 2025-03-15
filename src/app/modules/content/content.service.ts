@@ -25,6 +25,12 @@ const creeateContentIntoDb = async (content: IContent) => {
   }
 };
 
+const getAllContentFromDb = async () => {
+  const result = await Content.find();
+  return result;
+};
+
 export const ContentService = {
   creeateContentIntoDb,
+  getAllContentFromDb,
 };

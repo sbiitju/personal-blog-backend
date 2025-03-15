@@ -17,4 +17,6 @@ router.post(
   },
 );
 
+router.get('/', ContentController.getAllContent);
+
 export const ContentRoutes = router;
