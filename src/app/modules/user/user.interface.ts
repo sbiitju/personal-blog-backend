@@ -7,6 +7,7 @@ export interface IUser {
   role: 'admin' | 'political' | 'technical';
   isDeleted: boolean;
   isBlocked: boolean;
+  passwordChangedAt?: Date;
 }
 
 export type TUserRole = keyof typeof USER_ROLE;
