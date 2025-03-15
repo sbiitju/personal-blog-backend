@@ -30,4 +30,6 @@ router.get(
 
 router.get('/:id', ContentController.getContentById);
 
+
+
 export const ContentRoutes = router;
