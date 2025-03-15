@@ -1,9 +1,7 @@
 import { Schema, model } from 'mongoose';
+import { IBiograph } from './biograph.interface';
 
-interface IBiograph {
-  description: string;
-  domain: string;
-}
+ 
 
 const BiographSchema = new Schema<IBiograph>(
   {
