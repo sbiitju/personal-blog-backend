@@ -1,7 +1,7 @@
 export interface IContent {
-  doomain: string;
+  domain: string;
   title: string;
-  date: Date;
+  date?: Date;
   place: string;
   description: string;
   photo: string;
