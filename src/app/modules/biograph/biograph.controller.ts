@@ -25,7 +25,20 @@ const getBiograph = catchAsync(async (req, res) => {
   });
 });
 
+const updateBiograph = catchAsync(async (req, res) => {
+  const { domain } = req.params;
+  const biograph = req.body;
+  const result = await BiographService.updateBiographFromDb(domain, biograph);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Bio updated successfully',
+    data: result,
+  });
+});
+
 export const BiographController = {
   createBiograph,
   getBiograph,
+  updateBiograph,
 };

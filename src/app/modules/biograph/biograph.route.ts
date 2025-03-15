@@ -13,4 +13,10 @@ router.post(
 
 router.get('/:domain', BiographController.getBiograph);
 
+router.put(
+  '/:domain',
+  validateRequest(BiogaraphValidation.updateBiographSchema),
+  BiographController.updateBiograph,
+);
+
 export const BiographRoutes = router;

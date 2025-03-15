@@ -11,7 +11,15 @@ const getBiographFromDb = async (domain: string) => {
   return result;
 };
 
+const updateBiographFromDb = async (domain: string, payload: IBiograph) => {
+  const result = await Biograph.findOneAndUpdate({ domain }, payload, {
+    new: true,
+  });
+  return result;
+};
+
 export const BiographService = {
   createBiographIntoDb,
   getBiographFromDb,
+  updateBiographFromDb,
 };
