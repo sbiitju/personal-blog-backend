@@ -19,4 +19,6 @@ router.post(
 
 router.get('/', ContentController.getAllContent);
 
+router.get('/:domain', ContentController.getContentByDomain);
+
 export const ContentRoutes = router;

@@ -32,7 +32,19 @@ const getAllContent = catchAsync(async (req, res) => {
   });
 });
 
+const getContentByDomain = catchAsync(async (req, res) => {
+  const { domain } = req.params;
+  const result = await ContentService.getContentByDomain(domain);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Content fetched successfully',
+    data: result,
+  });
+});
+
 export const ContentController = {
   creaateContent,
   getAllContent,
+  getContentByDomain,
 };
