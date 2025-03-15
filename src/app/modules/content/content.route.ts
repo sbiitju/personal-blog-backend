@@ -17,6 +17,8 @@ router.post(
   },
 );
 
+
+
 router.get('/', ContentController.getAllContent);
 
 router.get('/domain/:domain', ContentController.getContentByDomain);
