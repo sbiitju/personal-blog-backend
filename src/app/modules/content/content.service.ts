@@ -35,8 +35,14 @@ const getContentByDomain = async (domain: string) => {
   return result;
 };
 
+const getContentByCategory = async (category: string) => {
+  const result = await Content.find({ category });
+  return result;
+};
+
 export const ContentService = {
   creeateContentIntoDb,
   getAllContentFromDb,
   getContentByDomain,
+  getContentByCategory
 };
