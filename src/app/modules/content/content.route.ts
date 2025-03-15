@@ -19,7 +19,7 @@ router.post(
 
 router.get('/', ContentController.getAllContent);
 
-router.get('/:domain', ContentController.getContentByDomain);
+router.get('/domain/:domain', ContentController.getContentByDomain);
 
 router.get('/category/:category', ContentController.getContentByCategory);
 
@@ -27,5 +27,7 @@ router.get(
   '/subcategory/:subcategory',
   ContentController.getContentBySubcategory,
 );
+
+router.get('/:id', ContentController.getContentById);
 
 export const ContentRoutes = router;

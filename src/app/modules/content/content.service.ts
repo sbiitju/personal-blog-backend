@@ -45,10 +45,16 @@ const getContentBySubcategory = async (subcategory: string) => {
   return result;
 };
 
+const getContentById = async (id: string) => {
+  const result = await Content.findById(id);
+  return result;
+};
+
 export const ContentService = {
   creeateContentIntoDb,
   getAllContentFromDb,
   getContentByDomain,
   getContentByCategory,
   getContentBySubcategory,
+  getContentById,
 };

@@ -65,10 +65,22 @@ const getContentBySubcategory = catchAsync(async (req, res) => {
   });
 });
 
+const getContentById = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await ContentService.getContentById(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Content fetched successfully',
+    data: result,
+  });
+});
+
 export const ContentController = {
   creaateContent,
   getAllContent,
   getContentByDomain,
   getContentByCategory,
   getContentBySubcategory,
+  getContentById,
 };
