@@ -6,6 +6,12 @@ const createBiographIntoDb = async (payload: IBiograph) => {
   return result;
 };
 
+const getBiographFromDb = async (domain: string) => {
+  const result = await Biograph.findOne({ domain });
+  return result;
+};
+
 export const BiographService = {
   createBiographIntoDb,
+  getBiographFromDb,
 };

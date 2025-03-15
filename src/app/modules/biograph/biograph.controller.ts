@@ -14,6 +14,18 @@ const createBiograph = catchAsync(async (req, res) => {
   });
 });
 
+const getBiograph = catchAsync(async (req, res) => {
+  const { domain } = req.params;
+  const result = await BiographService.getBiographFromDb(domain);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Bio fetched successfully',
+    data: result,
+  });
+});
+
 export const BiographController = {
   createBiograph,
+  getBiograph,
 };

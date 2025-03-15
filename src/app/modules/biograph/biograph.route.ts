@@ -11,4 +11,6 @@ router.post(
   BiographController.createBiograph,
 );
 
+router.get('/:domain', BiographController.getBiograph);
+
 export const BiographRoutes = router;
