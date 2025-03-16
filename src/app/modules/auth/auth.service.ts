@@ -3,15 +3,13 @@ import AppError from '../../errors/AppError';
 import { User } from '../user/user.model';
 import { ILoginUser } from './auth.interface';
 import config from '../../config';
-import { createToken } from './auth.utils';
+import { createToken, verifyToken } from './auth.utils';
 import { Political } from '../political/political.model';
 import { JwtPayload } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
 const loginUser = async (payload: ILoginUser) => {
   const user: any = await User.isUserExistsByEmail(payload?.email);
-  console.log(payload);
-  console.log(user);
   const currenUser = await Political.findOne({
     email: payload?.email,
   });
@@ -115,7 +113,64 @@ const changePassword = async (
   return null;
 };
 
+const refreshToken = async (token: string) => {
+  // checking if the given token is valid
+  const decoded = verifyToken(token, config.jwt_refresh_secret as string);
+
+  const { email, iat } = decoded;
+  // checking if the user is exist
+  const user: any = await User.isUserExistsByEmail(email);
+
+  const currenUser = await Political.findOne({
+    email: email,
+  });
+
+  if (!user && !currenUser) {
+    throw new AppError(httpStatus.NOT_FOUND, 'This user is not found !');
+  }
+  // checking if the user is already deleted
+  const isDeleted = user?.isDeleted;
+
+  if (isDeleted) {
+    throw new AppError(httpStatus.FORBIDDEN, 'This user is deleted !');
+  }
+
+  // checking if the user is blocked
+  const userStatus = user?.isBlocked;
+
+  if (userStatus === true) {
+    throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked ! !');
+  }
+
+  if (
+    user.passwordChangedAt &&
+    User.isJWTIssuedBeforePasswordChanged(user.passwordChangedAt, iat as number)
+  ) {
+    throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized !');
+  }
+
+  const jwtPayload = {
+    id: user?._id,
+    email: user?.email,
+    role: user?.role,
+    name: currenUser?.name || '',
+    domain: currenUser?.domain || '',
+    profilePicture: currenUser?.profilePicture || '',
+  };
+
+  const accessToken = createToken(
+    jwtPayload,
+    config.jwt_access_secret as string,
+    config.jwt_access_expire_in as string,
+  );
+
+  return {
+    accessToken,
+  };
+};
+
 export const AuthServices = {
   loginUser,
   changePassword,
+  refreshToken,
 };
