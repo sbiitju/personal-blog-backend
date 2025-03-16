@@ -7,6 +7,7 @@ import { createToken, verifyToken } from './auth.utils';
 import { Political } from '../political/political.model';
 import { JwtPayload } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import { sendEmail } from '../../utils/sendEmails';
 
 const loginUser = async (payload: ILoginUser) => {
   const user: any = await User.isUserExistsByEmail(payload?.email);
@@ -169,10 +170,54 @@ const refreshToken = async (token: string) => {
   };
 };
 
+const forgetPassword = async (userEmail: string) => {
+  // checking if the user is exist
+  const user: any = await User.isUserExistsByEmail(userEmail);
+  const currenUser = await Political.findOne({
+    email: userEmail,
+  });
+  if (!user && !currenUser) {
+    throw new AppError(httpStatus.NOT_FOUND, 'This user is not found !');
+  }
+  // checking if the user is already deleted
+  const isDeleted = user?.isDeleted;
 
+  if (isDeleted) {
+    throw new AppError(httpStatus.FORBIDDEN, 'This user is deleted !');
+  }
+
+  // checking if the user is blocked
+  const userStatus = user?.isBlocked;
+
+  if (userStatus === true) {
+    throw new AppError(httpStatus.FORBIDDEN, 'This user is blocked ! !');
+  }
+
+  const jwtPayload = {
+    id: user?._id,
+    email: user?.email,
+    role: user?.role,
+    name: currenUser?.name || '',
+    domain: currenUser?.domain || '',
+    profilePicture: currenUser?.profilePicture || '',
+  };
+
+  const resetToken = createToken(
+    jwtPayload,
+    config.jwt_access_secret as string,
+    config.jwt_access_expire_in as string,
+  );
+
+  const resetUILink = `${config.reset_pass_ui_link}/reset-password?email=${user.email}&token=${resetToken}`;
+
+  sendEmail(user.email, resetUILink);
+
+  // console.log(resetUILink);
+};
 
 export const AuthServices = {
   loginUser,
   changePassword,
   refreshToken,
+  forgetPassword,
 };
