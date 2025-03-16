@@ -4,6 +4,7 @@ import { ClientRoutes } from '../modules/political/political.routes';
 import { CategoryRoutes } from '../modules/category/category.routes';
 import { BiographRoutes } from '../modules/biograph/biograph.route';
 import { ContentRoutes } from '../modules/content/content.route';
+import { AuthRoutes } from '../modules/auth/auth.route';
 
 const router = Router();
 
@@ -27,6 +28,10 @@ const moduleRoutes = [
   {
     path: '/content',
     route: ContentRoutes,
+  },
+  {
+    path: '/auth',
+    route: AuthRoutes,
   },
 ];
 

@@ -5,11 +5,11 @@ import { ILoginUser } from './auth.interface';
 import config from '../../config';
 import { createToken } from './auth.utils';
 import { Political } from '../political/political.model';
-import { Types } from 'mongoose';
 
 const loginUser = async (payload: ILoginUser) => {
   const user: any = await User.isUserExistsByEmail(payload?.email);
-
+  console.log(payload);
+  console.log(user);
   const currenUser = await Political.findOne({
     email: payload?.email,
   });
@@ -18,16 +18,17 @@ const loginUser = async (payload: ILoginUser) => {
   if (!user && !currenUser) {
     throw new AppError(httpStatus.NOT_FOUND, 'This user is not found');
   }
-  if (user.isDeleted) {
+  if (user?.isDeleted) {
     throw new AppError(httpStatus.BAD_REQUEST, 'This user is deleted');
   }
-  if (user.isBlocked) {
+  if (user?.isBlocked) {
     throw new AppError(httpStatus.BAD_REQUEST, 'This user is block');
   }
 
   if (!(await User.isUserPasswordMatch(payload?.password, user?.password))) {
     throw new AppError(httpStatus.NOT_FOUND, 'Incorrect password');
   }
+  console.log(user?.password);
 
   const jwtPayload = {
     id: user?._id,

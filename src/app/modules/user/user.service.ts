@@ -20,6 +20,7 @@ const createClientAccountIntoDb = async (
   userData.password = password || (config.default_password as string);
   // set role
   userData.role = role || 'political';
+  userData.email = payload.email;
 
   const session = await mongoose.startSession();
   try {
@@ -58,6 +59,8 @@ const createAdminAccountIntoDb = async (password: string, payload: IAdmin) => {
   userData.password = password || (config.default_password as string);
   // set role
   userData.role = 'admin';
+
+  userData.email = payload.email;
 
   const session = await mongoose.startSession();
   try {

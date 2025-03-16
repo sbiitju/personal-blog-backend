@@ -64,7 +64,7 @@ userSchema.post('save', function (doc, next) {
 
 // Method to find user by email
 userSchema.statics.isUserExistsByEmail = async function (email: string) {
-  return await this.findOne({ email }).select('+password'); // Always include password for comparison
+  return await this.findOne({ email }).select('+password');  
 };
 
 // Method to compare password during login
