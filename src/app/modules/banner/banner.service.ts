@@ -12,6 +12,12 @@ const createBannerIntoDb = async (file: TImageFile, domain: string) => {
   return result;
 };
 
+const deleteBanner = async (id: string) => {
+  const result = await Banner.findByIdAndDelete(id);
+  return result;
+};
+
 export const BannerServices = {
   createBannerIntoDb,
+  deleteBanner,
 };

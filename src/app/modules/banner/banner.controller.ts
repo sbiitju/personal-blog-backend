@@ -21,6 +21,18 @@ const createBanner = catchAsync(async (req, res) => {
   });
 });
 
+const deleteBanner = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await BannerServices.deleteBanner(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Banner deleted successfully',
+    data: result,
+  });
+});
+
 export const BannerController = {
   createBanner,
+  deleteBanner,
 };
