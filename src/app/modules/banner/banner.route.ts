@@ -12,6 +12,8 @@ router.post(
   BannerController.createBanner,
 );
 
+router.get('/', BannerController.getAllBanner);
+
 router.delete(
   '/:id',
   auth(USER_ROLE.political, USER_ROLE.admin, USER_ROLE.technical),
