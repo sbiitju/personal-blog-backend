@@ -4,7 +4,7 @@ import config from './app/config';
 
 import { Server } from 'http';
 
-let server: Server;
+let server: any;
 
 async function main() {
   try {

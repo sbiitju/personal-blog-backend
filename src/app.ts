@@ -11,13 +11,13 @@ const app: Application = express();
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(cors({ origin: ['http://localhost:5173'] }));
+app.use(cors({ origin: '*' }));
 
 // Serve static files from the 'build' directory
 app.use(express.static(path.join(__dirname, '..', 'build')));
 
 // application routes
-app.use('/api', router)
+app.use('/api', router);
 
 // Test route
 app.get('/', async (req: Request, res: Response) => {
