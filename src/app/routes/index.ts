@@ -5,6 +5,7 @@ import { CategoryRoutes } from '../modules/category/category.routes';
 import { BiographRoutes } from '../modules/biograph/biograph.route';
 import { ContentRoutes } from '../modules/content/content.route';
 import { AuthRoutes } from '../modules/auth/auth.route';
+import { BannerRoutes } from '../modules/banner/banner.route';
 
 const router = Router();
 
@@ -32,6 +33,10 @@ const moduleRoutes = [
   {
     path: '/auth',
     route: AuthRoutes,
+  },
+  {
+    path: '/banner',
+    route: BannerRoutes,
   },
 ];
 
