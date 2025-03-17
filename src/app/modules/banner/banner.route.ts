@@ -12,7 +12,7 @@ router.post(
   BannerController.createBanner,
 );
 
-router.get('/', BannerController.getAllBanner);
+router.get('/:domain', BannerController.getAllBanner);
 
 router.delete(
   '/:id',

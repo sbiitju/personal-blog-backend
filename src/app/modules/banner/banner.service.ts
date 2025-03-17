@@ -12,8 +12,10 @@ const createBannerIntoDb = async (file: TImageFile, domain: string) => {
   return result;
 };
 
-const getAllBanner = async () => {
-  const result = Banner.find();
+const getAllBanner = async (domain: string) => {
+  const result = Banner.find({
+    domain: domain,
+  });
   return result;
 };
 

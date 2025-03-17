@@ -22,7 +22,8 @@ const createBanner = catchAsync(async (req, res) => {
 });
 
 const getAllBanner = catchAsync(async (req, res) => {
-  const result = await BannerServices.getAllBanner();
+  const domain = req?.params?.domain;
+  const result = await BannerServices.getAllBanner(domain);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
