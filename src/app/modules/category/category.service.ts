@@ -26,9 +26,15 @@ const getAllSubCategories = async () => {
   return result;
 };
 
+const deleteCategory = async (id: string) => {
+  const result = await Category.findByIdAndDelete(id);
+  return result;
+};
+
 export const CatgoryServices = {
   createCategory,
   getAllCategories,
   createSubCategory,
   getAllSubCategories,
+  deleteCategory,
 };
