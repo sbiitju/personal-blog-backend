@@ -7,8 +7,8 @@ const createCategory = async (categoryData: ICategory) => {
   return category;
 };
 
-const getAllCategories = async () => {
-  return Category.find().populate('subcategories');
+const getAllCategories = async (role: string) => {
+  return Category.find({ role: role }).populate('subcategories');
 };
 
 const createSubCategory = async (subCategoryData: ISubcategory) => {

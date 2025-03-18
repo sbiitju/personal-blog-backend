@@ -2,8 +2,6 @@ import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsynch';
 import sendResponse from '../../utils/sendResponse';
 import { CatgoryServices } from './category.service';
-import { get } from 'mongoose';
-import { Subcategory } from '../sub-category/sub-category.model';
 
 const createCategory = catchAsync(async (req, res) => {
   const category = req.body;
@@ -17,7 +15,8 @@ const createCategory = catchAsync(async (req, res) => {
 });
 
 const getAllCategories = catchAsync(async (req, res) => {
-  const result = await CatgoryServices.getAllCategories();
+  const { role } = req.params;
+  const result = await CatgoryServices.getAllCategories(role);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -51,4 +50,5 @@ export const CategoryController = {
   createCategory,
   getAllCategories,
   createSubCategory,
+  getAllSubCategories,
 };

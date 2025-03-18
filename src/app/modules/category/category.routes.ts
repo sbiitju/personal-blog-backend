@@ -16,8 +16,8 @@ router.post(
   CategoryController.createSubCategory,
 );
 
-router.get('/get-all-categories', CategoryController.getAllCategories);
+router.get('/categories/:role', CategoryController.getAllCategories);
 
-router.get('/get-all-su-categories', CategoryController.getAllCategories);
+router.get('/sub-categories', CategoryController.getAllSubCategories);
 
 export const CategoryRoutes = router;
