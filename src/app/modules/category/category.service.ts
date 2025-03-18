@@ -21,8 +21,14 @@ const createSubCategory = async (subCategoryData: ISubcategory) => {
   return subCategory;
 };
 
+const getAllSubCategories = async () => {
+  const result = await Subcategory.find();
+  return result;
+};
+
 export const CatgoryServices = {
   createCategory,
   getAllCategories,
   createSubCategory,
+  getAllSubCategories,
 };
