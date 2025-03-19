@@ -4,10 +4,15 @@ import sendResponse from '../../utils/sendResponse';
 import { BannerServices } from './banner.service';
 import { TImageFile } from '../../interface/image.interface';
 import { JwtPayload } from 'jsonwebtoken';
+import AppError from '../../errors/AppError';
 
 const createBanner = catchAsync(async (req, res) => {
   const file = req?.file;
+  if (!file) {
+    new AppError(httpStatus.BAD_REQUEST, 'Please provide a photo');
+  }
   const user = req?.user as JwtPayload;
+  console.log(user)
   const domain = user?.domain;
   const result = await BannerServices.createBannerIntoDb(
     file as TImageFile,

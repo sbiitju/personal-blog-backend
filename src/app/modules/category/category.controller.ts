@@ -15,8 +15,18 @@ const createCategory = catchAsync(async (req, res) => {
 });
 
 const getAllCategories = catchAsync(async (req, res) => {
+  const result = await CatgoryServices.getAllCategory();
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Categories fetched successfully',
+    data: result,
+  });
+});
+
+const getAllCategoriesByRole = catchAsync(async (req, res) => {
   const { role } = req.params;
-  const result = await CatgoryServices.getAllCategories(role);
+  const result = await CatgoryServices.getAllCategoriesByRole(role);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -59,8 +69,9 @@ const deleteCategory = catchAsync(async (req, res) => {
 
 export const CategoryController = {
   createCategory,
-  getAllCategories,
+  getAllCategoriesByRole,
   createSubCategory,
   getAllSubCategories,
   deleteCategory,
+  getAllCategories,
 };

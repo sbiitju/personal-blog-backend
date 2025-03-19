@@ -9,6 +9,7 @@ const router = express.Router();
 router.post(
   '/create-banner',
   multerUpload.single('file'),
+  auth(USER_ROLE.political, USER_ROLE.admin, USER_ROLE.technical),
   BannerController.createBanner,
 );
 

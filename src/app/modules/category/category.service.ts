@@ -7,8 +7,13 @@ const createCategory = async (categoryData: ICategory) => {
   return category;
 };
 
-const getAllCategories = async (role: string) => {
+const getAllCategoriesByRole = async (role: string) => {
   return Category.find({ role: role }).populate('subcategories');
+};
+
+const getAllCategory = async () => {
+  const result = await Category.find();
+  return result;
 };
 
 const createSubCategory = async (subCategoryData: ISubcategory) => {
@@ -33,8 +38,9 @@ const deleteCategory = async (id: string) => {
 
 export const CatgoryServices = {
   createCategory,
-  getAllCategories,
+  getAllCategoriesByRole,
   createSubCategory,
   getAllSubCategories,
   deleteCategory,
+  getAllCategory,
 };

@@ -16,7 +16,9 @@ router.post(
   CategoryController.createSubCategory,
 );
 
-router.get('/:role', CategoryController.getAllCategories);
+router.get('/:role', CategoryController.getAllCategoriesByRole);
+
+router.get('/', CategoryController.getAllCategories);
 
 router.get('/sub-categories', CategoryController.getAllSubCategories);
 
