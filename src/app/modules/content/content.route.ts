@@ -41,4 +41,6 @@ router.get(
 
 router.get('/:id', ContentController.getContentById);
 
+router.delete('/:id', ContentController.deleteContentById);
+
 export const ContentRoutes = router;

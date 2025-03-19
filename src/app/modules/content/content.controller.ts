@@ -92,6 +92,17 @@ const getContentById = catchAsync(async (req, res) => {
   });
 });
 
+const deleteContentById = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await ContentService.deleteContentById(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Content deleted successfully',
+    data: result,
+  });
+});
+
 export const ContentController = {
   creaateContent,
   getAllContent,
@@ -100,4 +111,5 @@ export const ContentController = {
   getContentBySubcategory,
   getContentById,
   updateContent,
+  deleteContentById,
 };

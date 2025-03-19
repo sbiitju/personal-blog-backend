@@ -93,6 +93,11 @@ const getContentById = async (id: string) => {
   return result;
 };
 
+const deleteContentById = async (id: string) => {
+  const result = await Content.findByIdAndDelete(id);
+  return result;
+};
+
 export const ContentService = {
   creeateContentIntoDb,
   getAllContentFromDb,
@@ -101,4 +106,5 @@ export const ContentService = {
   getContentBySubcategory,
   getContentById,
   updateContentIntoDb,
+  deleteContentById,
 };
