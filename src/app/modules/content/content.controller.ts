@@ -4,6 +4,7 @@ import catchAsync from '../../utils/catchAsynch';
 import sendResponse from '../../utils/sendResponse';
 import { ContentService } from './content.service';
 import AppError from '../../errors/AppError';
+import { get } from 'http';
 
 const creaateContent = catchAsync(async (req, res) => {
   const file = req.file as TImageFile;
@@ -59,6 +60,19 @@ const getContentByDomain = catchAsync(async (req, res) => {
   });
 });
 
+const getContentByCategoryAndDomain = catchAsync(async (req, res) => {
+  const { category, domain } = req.params;
+  const result = await ContentService.getContentByCategoryAndDomain(
+    category,
+    domain,
+  );
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Content fetched successfully',
+    data: result,
+  });
+});
 const getContentByCategory = catchAsync(async (req, res) => {
   const { category } = req.params;
   const result = await ContentService.getContentByCategory(category);
@@ -70,6 +84,19 @@ const getContentByCategory = catchAsync(async (req, res) => {
   });
 });
 
+const getContentBySubcategoryAndDomain = catchAsync(async (req, res) => {
+  const { subcategory, domain } = req.params;
+  const result = await ContentService.getContentBySubcategoryAndDomain(
+    subcategory,
+    domain,
+  );
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Content fetched successfully',
+    data: result,
+  });
+});
 const getContentBySubcategory = catchAsync(async (req, res) => {
   const { subcategory } = req.params;
   const result = await ContentService.getContentBySubcategory(subcategory);
@@ -112,4 +139,6 @@ export const ContentController = {
   getContentById,
   updateContent,
   deleteContentById,
+  getContentByCategoryAndDomain,
+  getContentBySubcategoryAndDomain,
 };

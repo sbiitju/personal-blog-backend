@@ -83,8 +83,24 @@ const getContentByCategory = async (category: string) => {
   return result;
 };
 
+const getContentByCategoryAndDomain = async (
+  category: string,
+  domain: string,
+) => {
+  const result = await Content.find({ category, domain });
+  return result;
+};
+
 const getContentBySubcategory = async (subcategory: string) => {
   const result = await Content.find({ subcategory });
+  return result;
+};
+
+const getContentBySubcategoryAndDomain = async (
+  subcategory: string,
+  domain: string,
+) => {
+  const result = await Content.find({ subcategory, domain });
   return result;
 };
 
@@ -107,4 +123,6 @@ export const ContentService = {
   getContentById,
   updateContentIntoDb,
   deleteContentById,
+  getContentByCategoryAndDomain,
+  getContentBySubcategoryAndDomain,
 };

@@ -35,8 +35,18 @@ router.get('/domain/:domain', ContentController.getContentByDomain);
 router.get('/category/:category', ContentController.getContentByCategory);
 
 router.get(
+  '/category/:category/domain/:domain',
+  ContentController.getContentByCategoryAndDomain,
+);
+
+router.get(
   '/subcategory/:subcategory',
   ContentController.getContentBySubcategory,
+);
+
+router.get(
+  '/subcategory/:subcategory/domain/:domain',
+  ContentController.getContentBySubcategoryAndDomain,
 );
 
 router.get('/:id', ContentController.getContentById);
