@@ -4,7 +4,7 @@ const createClientSchema = z.object({
   password: z.string().optional(),
   role: z.string().optional(),
   client: z.object({
-    user: z.string({ required_error: 'User ID is required' }), // MongoDB ObjectId is stored as a string
+    user: z.string().optional(), 
     name: z.string({ required_error: 'Name is required' }),
     email: z
       .string({ required_error: 'Email is required' })
