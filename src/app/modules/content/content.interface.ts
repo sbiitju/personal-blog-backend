@@ -1,7 +1,7 @@
 export interface IContent {
   domain: string;
   title: string;
-  date?: Date;
+  date?: string;
   place: string;
   description: string;
   photo: string;

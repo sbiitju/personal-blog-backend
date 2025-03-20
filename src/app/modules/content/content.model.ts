@@ -4,7 +4,7 @@ import { IContent } from './content.interface';
 const contentSchema = new Schema<IContent>({
   domain: { type: String, required: true },
   title: { type: String, required: true },
-  date: { type: Date },
+  date: { type: String },
   place: { type: String, required: true },
   description: { type: String, required: true },
   photo: { type: String, required: true },
