@@ -28,8 +28,7 @@ const loginUser = async (payload: ILoginUser) => {
 
   if (!(await User.isUserPasswordMatch(payload?.password, user?.password))) {
     throw new AppError(httpStatus.NOT_FOUND, 'Incorrect password');
-  }
-  console.log(user?.password);
+  } 
 
   const jwtPayload = {
     id: user?._id,

@@ -7,8 +7,7 @@ const createBannerIntoDb = async (file: TImageFile, domain: string) => {
   if (file && domain) {
     payload.image = file.path;
     payload.domain = domain;
-  }
-  console.log(payload)
+  } 
   const result = await Banner.create(payload);
   return result;
 };

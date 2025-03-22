@@ -12,7 +12,6 @@ const createBanner = catchAsync(async (req, res) => {
     new AppError(httpStatus.BAD_REQUEST, 'Please provide a photo');
   }
   const user = req?.user as JwtPayload;
-  console.log(user)
   const domain = user?.domain;
   const result = await BannerServices.createBannerIntoDb(
     file as TImageFile,
