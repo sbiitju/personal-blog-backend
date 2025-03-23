@@ -8,12 +8,21 @@ import { Political } from '../political/political.model';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import { sendEmail } from '../../utils/sendEmails';
+import { Admin } from '../admin/admin.model';
 
 const loginUser = async (payload: ILoginUser) => {
   const user: any = await User.isUserExistsByEmail(payload?.email);
-  const currenUser = await Political.findOne({
-    email: payload?.email,
-  });
+  console.log(user);
+  let currenUser: any;
+  if (user?.role === 'admin') {
+    currenUser = await Admin.findOne({
+      email: payload?.email,
+    });
+  } else {
+    currenUser = await Political.findOne({
+      email: payload?.email,
+    });
+  }
 
   // if user not found
   if (!user && !currenUser) {
@@ -28,7 +37,7 @@ const loginUser = async (payload: ILoginUser) => {
 
   if (!(await User.isUserPasswordMatch(payload?.password, user?.password))) {
     throw new AppError(httpStatus.NOT_FOUND, 'Incorrect password');
-  } 
+  }
 
   const jwtPayload = {
     id: user?._id,
