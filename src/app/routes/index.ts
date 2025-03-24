@@ -6,6 +6,7 @@ import { BiographRoutes } from '../modules/biograph/biograph.route';
 import { ContentRoutes } from '../modules/content/content.route';
 import { AuthRoutes } from '../modules/auth/auth.route';
 import { BannerRoutes } from '../modules/banner/banner.route';
+import { AdminRoutes } from '../modules/admin/admin.route';
 
 const router = Router();
 
@@ -13,6 +14,10 @@ const moduleRoutes = [
   {
     path: '/users',
     route: UserRoutes,
+  },
+  {
+    path: '/admin',
+    route: AdminRoutes,
   },
   {
     path: '/client',
