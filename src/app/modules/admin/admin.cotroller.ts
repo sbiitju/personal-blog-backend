@@ -13,6 +13,18 @@ const getAllUsers = catchAsync(async (req, res) => {
   });
 });
 
+const deleteUserByUserID = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await AdminServices.deleteUserByUserId(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Users deleted successfully',
+    data: result,
+  });
+});
+
 export const AdminControllers = {
   getAllUsers,
+  deleteUserByUserID,
 };
