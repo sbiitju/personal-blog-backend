@@ -13,9 +13,9 @@ const getAllUsers = catchAsync(async (req, res) => {
   });
 });
 
-const deleteUserByUserID = catchAsync(async (req, res) => {
+const toggleUserDeletionStatus = catchAsync(async (req, res) => {
   const { id } = req.params;
-  const result = await AdminServices.deleteUserByUserId(id);
+  const result = await AdminServices.toggleUserDeletionStatus(id);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -26,5 +26,5 @@ const deleteUserByUserID = catchAsync(async (req, res) => {
 
 export const AdminControllers = {
   getAllUsers,
-  deleteUserByUserID,
+  toggleUserDeletionStatus,
 };

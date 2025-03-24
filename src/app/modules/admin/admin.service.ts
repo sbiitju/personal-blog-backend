@@ -15,16 +15,23 @@ const getAllUsers = async () => {
   return allUsers;
 };
 
-const deleteUserByUserId = async (id: string) => {
-  const result = await User.findByIdAndUpdate(
+const toggleUserDeletionStatus = async (id: string) => {
+  const user = await User.findById(id);
+
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, 'User not found');
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(
     id,
-    { isDeleted: true },
+    { isDeleted: !user.isDeleted }, // Toggle the value
     { new: true },
   );
-  return result;
+
+  return updatedUser;
 };
 
 export const AdminServices = {
   getAllUsers,
-  deleteUserByUserId,
+  toggleUserDeletionStatus,
 };

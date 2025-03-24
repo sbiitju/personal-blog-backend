@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.get('/users', AdminControllers.getAllUsers);
 
-router.put('/users/:id', AdminControllers.deleteUserByUserID);
+router.put('/users/:id', AdminControllers.toggleUserDeletionStatus);
 
 export const AdminRoutes = router;
