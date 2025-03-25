@@ -31,7 +31,24 @@ const toggleUserDeletionStatus = async (id: string) => {
   return updatedUser;
 };
 
+const toggleUserBlockStatus = async (id: string) => {
+  const user = await User.findById(id);
+
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, 'User not found');
+  }
+
+  const updatedUser = await User.findByIdAndUpdate(
+    id,
+    { isBlocked: !user.isBlocked },
+    { new: true },
+  );
+
+  return updatedUser;
+};
+
 export const AdminServices = {
   getAllUsers,
   toggleUserDeletionStatus,
+  toggleUserBlockStatus
 };

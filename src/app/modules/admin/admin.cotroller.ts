@@ -24,6 +24,8 @@ const toggleUserDeletionStatus = catchAsync(async (req, res) => {
   });
 });
 
+
+
 export const AdminControllers = {
   getAllUsers,
   toggleUserDeletionStatus,
