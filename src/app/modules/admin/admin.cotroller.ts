@@ -24,9 +24,19 @@ const toggleUserDeletionStatus = catchAsync(async (req, res) => {
   });
 });
 
-
+const toggleUserBlockStatus = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const result = await AdminServices.toggleUserDeletionStatus(id);
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: 'Users deleted successfully',
+    data: result,
+  });
+});
 
 export const AdminControllers = {
   getAllUsers,
   toggleUserDeletionStatus,
+  toggleUserBlockStatus,
 };
