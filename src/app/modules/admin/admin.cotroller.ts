@@ -30,7 +30,7 @@ const toggleUserBlockStatus = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Users deleted successfully',
+    message: 'Users blocked successfully',
     data: result,
   });
 });
