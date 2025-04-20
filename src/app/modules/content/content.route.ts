@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post(
   '/create-content',
-  multerUpload.single('file'), // Handle file upload
+  multerUpload.single('file'),  
   (req: Request, res: Response, next: NextFunction) => {
     req.body = ContentValidation.createContentSchema.parse(
       JSON.parse(req.body.data),

@@ -6,7 +6,7 @@ import { IContent } from './content.interface';
 import { Political } from '../political/political.model';
 
 const creeateContentIntoDb = async (content: IContent) => {
-  const domain = content.domain;
+  const domain = content?.domain;
   const user = await Political.findOne({ domain });
   if (!user) {
     throw new AppError(
