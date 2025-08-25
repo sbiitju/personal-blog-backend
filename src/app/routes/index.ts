@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { UserRoutes } from '../modules/user/user.routes';
-import { ClientRoutes } from '../modules/political/political.routes';
+
 import { CategoryRoutes } from '../modules/category/category.routes';
 import { BiographRoutes } from '../modules/biograph/biograph.route';
 import { ContentRoutes } from '../modules/content/content.route';
@@ -19,10 +19,7 @@ const moduleRoutes = [
     path: '/admin',
     route: AdminRoutes,
   },
-  {
-    path: '/client',
-    route: ClientRoutes,
-  },
+
   {
     path: '/category',
     route: CategoryRoutes,

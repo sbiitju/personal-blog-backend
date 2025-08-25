@@ -13,8 +13,10 @@ app.use(cookieParser());
 
 app.use(cors({ origin: '*' }));
 
-// Serve static files from the 'build' directory
-app.use(express.static(path.join(__dirname, '..', 'build')));
+// Serve static files from the 'build' directory only in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '..', 'build')));
+}
 
 // application routes
 app.use('/api', router);
@@ -25,10 +27,12 @@ app.get('/', async (req: Request, res: Response) => {
   res.send(message);
 });
 
-// Catch-all route for client-side routing
-app.get('*', (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
-});
+// Catch-all route for client-side routing only in production
+if (process.env.NODE_ENV === 'production') {
+  app.get('*', (req: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, '..', 'build', 'index.html'));
+  });
+}
 
 // global error handler
 app.use(globalErrorHandler);
