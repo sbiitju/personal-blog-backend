@@ -69,17 +69,17 @@ const updateContentIntoDb = async (id: string, content: IContent) => {
 };
 
 const getAllContentFromDb = async () => {
-  const result = await Content.find();
+  const result = await Content.find().sort({ createdAt: -1 });
   return result;
 };
 
 const getContentByDomain = async (domain: string) => {
-  const result = await Content.find({ domain });
+  const result = await Content.find({ domain }).sort({ createdAt: -1 });
   return result;
 };
 
 const getContentByCategory = async (category: string) => {
-  const result = await Content.find({ category });
+  const result = await Content.find({ category }).sort({ createdAt: -1 });
   return result;
 };
 
@@ -87,12 +87,12 @@ const getContentByCategoryAndDomain = async (
   category: string,
   domain: string,
 ) => {
-  const result = await Content.find({ category, domain });
+  const result = await Content.find({ category, domain }).sort({ createdAt: -1 });
   return result;
 };
 
 const getContentBySubcategory = async (subcategory: string) => {
-  const result = await Content.find({ subcategory });
+  const result = await Content.find({ subcategory }).sort({ createdAt: -1 });
   return result;
 };
 
@@ -100,7 +100,7 @@ const getContentBySubcategoryAndDomain = async (
   subcategory: string,
   domain: string,
 ) => {
-  const result = await Content.find({ subcategory, domain });
+  const result = await Content.find({ subcategory, domain }).sort({ createdAt: -1 });
   return result;
 };
 

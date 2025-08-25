@@ -10,6 +10,8 @@ const contentSchema = new Schema<IContent>({
   photo: { type: String, required: true },
   category: { type: String, required: true },
   subcategory: { type: String, required: true },
+}, {
+  timestamps: true
 });
 
 export const Content = model<IContent>('Content', contentSchema);

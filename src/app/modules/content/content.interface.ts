@@ -7,4 +7,6 @@ export interface IContent {
   photo: string;
   category: string;
   subcategory: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
