@@ -83,6 +83,15 @@ politicalSchema.pre('validate', async function (next) {
   next();
 });
 
+// Static methods
+politicalSchema.statics.isUserExistsByDomain = async function (domain: string) {
+  return await Political.findOne({ domain });
+};
+
+politicalSchema.statics.isUserExistsByEmail = async function (email: string) {
+  return await Political.findOne({ email });
+};
+
 export const Political = model<IPolitical, PoliticalModel>(
   'Political',
   politicalSchema,

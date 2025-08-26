@@ -7,6 +7,7 @@ import { ContentRoutes } from '../modules/content/content.route';
 import { AuthRoutes } from '../modules/auth/auth.route';
 import { BannerRoutes } from '../modules/banner/banner.route';
 import { AdminRoutes } from '../modules/admin/admin.route';
+import { PoliticalRoutes } from '../modules/political/political.route';
 
 const router = Router();
 
@@ -19,7 +20,10 @@ const moduleRoutes = [
     path: '/admin',
     route: AdminRoutes,
   },
-
+  {
+    path: '/political',
+    route: PoliticalRoutes,
+  },
   {
     path: '/category',
     route: CategoryRoutes,

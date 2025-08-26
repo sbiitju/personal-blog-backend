@@ -17,8 +17,11 @@ const auth = (...requiredRoles: (keyof typeof USER_ROLE)[]) => {
       throw new AppError(httpStatus.UNAUTHORIZED, 'You are not authorized!');
     }
 
+    // Extract token from Bearer format
+    const actualToken = token.startsWith('Bearer ') ? token.substring(7) : token;
+
     const decoded = verifyToken(
-      token,
+      actualToken,
       config.jwt_access_secret as string,
     ) as JwtPayload;
 
