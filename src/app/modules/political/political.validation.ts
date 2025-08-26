@@ -17,10 +17,18 @@ const updatePoliticalProfileSchema = z.object({
   profilePicture: z.string().url('Invalid URL').optional(),
   socialLinks: z
     .object({
-      facebook: z.string().url('Invalid Facebook URL').optional(),
-      youtube: z.string().url('Invalid YouTube URL').optional(),
-      instagram: z.string().url('Invalid Instagram URL').optional(),
-      twitter: z.string().url('Invalid Twitter URL').optional(),
+      facebook: z.string().refine((val) => !val || /^https?:\/\/.+/.test(val), {
+        message: 'Invalid Facebook URL',
+      }).optional(),
+      youtube: z.string().refine((val) => !val || /^https?:\/\/.+/.test(val), {
+        message: 'Invalid YouTube URL',
+      }).optional(),
+      instagram: z.string().refine((val) => !val || /^https?:\/\/.+/.test(val), {
+        message: 'Invalid Instagram URL',
+      }).optional(),
+      twitter: z.string().refine((val) => !val || /^https?:\/\/.+/.test(val), {
+        message: 'Invalid Twitter URL',
+      }).optional(),
     })
     .optional(),
   domain: z.string().optional(),
