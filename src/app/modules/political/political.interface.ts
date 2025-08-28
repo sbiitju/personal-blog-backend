@@ -17,6 +17,12 @@ export interface IPolitical {
   domain: string;
   position: string;
   address: string;
+  emailJs?: {
+    serviceId?: string;
+    templateId?: string;
+    publicKey?: string;
+    toEmail?: string;
+  };
 }
 
 export interface PoliticalModel extends Model<IPolitical> {

@@ -12,7 +12,7 @@ import { Admin } from '../admin/admin.model';
 
 const loginUser = async (payload: ILoginUser) => {
   const user: any = await User.isUserExistsByEmail(payload?.email);
-  console.log(user);
+
   let currenUser: any;
   if (user?.role === 'admin') {
     currenUser = await Admin.findOne({

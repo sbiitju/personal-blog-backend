@@ -27,7 +27,6 @@ router.patch(
 // Get political user by domain (public route)
 router.get(
   '/domain/:domain',
-  validateRequest(politicalValidation.getPoliticalByDomainSchema),
   PoliticalController.getPoliticalByDomain
 );
 

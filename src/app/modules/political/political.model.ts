@@ -58,6 +58,12 @@ const politicalSchema = new Schema<IPolitical, PoliticalModel>(
       type: String,
       required: true,
     },
+    emailJs: {
+      serviceId: { type: String },
+      templateId: { type: String },
+      publicKey: { type: String },
+      toEmail: { type: String },
+    },
   },
   { timestamps: true },
 );

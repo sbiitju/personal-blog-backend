@@ -34,13 +34,16 @@ const updatePoliticalProfileSchema = z.object({
   domain: z.string().optional(),
   position: z.string().optional(),
   address: z.string().optional(),
-});
-
-const getPoliticalByDomainSchema = z.object({
-  domain: z.string({ required_error: 'Domain is required' }),
+  emailJs: z
+    .object({
+      serviceId: z.string().optional(),
+      templateId: z.string().optional(),
+      publicKey: z.string().optional(),
+      toEmail: z.string().email('Invalid recipient email').optional(),
+    })
+    .optional(),
 });
 
 export const politicalValidation = {
   updatePoliticalProfileSchema,
-  getPoliticalByDomainSchema,
 };
